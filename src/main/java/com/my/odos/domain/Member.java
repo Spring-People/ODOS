@@ -67,4 +67,8 @@ public class Member {
     public void setConnected(boolean connected) {
         this.connected = connected;
     }
+
+    public boolean matchPassword(String password){
+        return this.pw.equals(password);
+    }
 }
