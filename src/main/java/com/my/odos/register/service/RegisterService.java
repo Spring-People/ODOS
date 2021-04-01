@@ -26,6 +26,7 @@ public class RegisterService {
         member.setName(req.getName());
         member.setConnected(false);
         member.setPw(req.getPassword());
+        member.setGroup_id(1);
 
         registerRepository.save(member);
 
