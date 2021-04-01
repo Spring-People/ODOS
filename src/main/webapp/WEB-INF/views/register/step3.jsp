@@ -8,6 +8,6 @@
 <body>
 <p><strong>${registerRequest.name}님</strong>
     회원 가입을 완료했습니다.</p>
-<p><a href="<c:url value='/register/step1'/>">[첫 화면 이동]</a></p>
+<p><a href="<c:url value='/login'/>">[로그인 화면 이동]</a></p>
 </body>
 </html>
