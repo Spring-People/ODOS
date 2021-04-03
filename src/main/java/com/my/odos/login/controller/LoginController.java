@@ -37,7 +37,21 @@ public class LoginController {
         try{
             AuthInfo authInfo = authService.authenticate(loginCommand.getEmail(), loginCommand.getPassword());
 
-            session.setAttribute("authInfo",authInfo);
+            session.setAttribute("authInfo", authInfo);
+
+             /*
+                1. 이메일로 DB에서 객체 조회
+                2. 객체에서 connected 변수 상태 확인
+                3. connected = false 일 경우 초대장 페이지로 이동
+            */
+            String email = loginCommand.getEmail();
+            boolean isConnectedMember = authService.isConnetcedMember(email);
+            if (!isConnectedMember) {
+                System.out.println("초대장 페이지 이");
+                return "redirect:invitation/Invitation.html";
+//                return "invitation/Invitation";
+            }
+
 
             return "login/loginSuccess";
         } catch (WrongIdPasswordException e){
