@@ -52,7 +52,6 @@ public class LoginController {
 //                return "invitation/Invitation";
             }
 
-
             return "login/loginSuccess";
         } catch (WrongIdPasswordException e){
             return "login/loginForm";

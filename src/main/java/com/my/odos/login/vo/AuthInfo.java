@@ -35,4 +35,5 @@ public class AuthInfo {
     public void setName(String name) {
         this.name = name;
     }
+
 }
