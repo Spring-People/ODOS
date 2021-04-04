@@ -14,7 +14,7 @@ public class Member {
     private String email;
     private String pw;
     private String name;
-    private int group_id;
+    private int groupId;
     private boolean connected;
 
     public Member() {
@@ -52,12 +52,12 @@ public class Member {
         this.pw = pw;
     }
 
-    public int getGroup_id() {
-        return group_id;
+    public int getGroupId() {
+        return groupId;
     }
 
-    public void setGroup_id(int group_id) {
-        this.group_id = group_id;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public boolean isConnected() {
