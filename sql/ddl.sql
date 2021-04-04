@@ -21,5 +21,15 @@ create table Invitation(
     id int auto_increment,
     to_id int,
     from_id int,
+    connected boolean,
     primary key (id)
+);
+
+create table Problem(
+    id int auto_increment,
+    group_id int,
+    num int,
+    solved int,
+    primary key (id),
+    FOREIGN KEY(group_id) REFERENCES Team(id)
 );
