@@ -12,4 +12,5 @@ public interface ProblemRepository extends JpaRepository <Problem, Integer> {
     List<Problem> findAllBy();
     List<Problem> findByGroupId(int group_id);
     Problem findById(int id);
+    List<Problem> findAllByGroupIdOrderByIdDesc(int groupId);
 }

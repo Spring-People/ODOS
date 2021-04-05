@@ -1,4 +1,4 @@
-package com.my.odos.invitation.repository;
+package com.my.odos.team.respository;
 
 import com.my.odos.domain.Team;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>메인</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <script language="JavaScript">
 
@@ -42,6 +43,19 @@
         if(Check < 0) {
             clearInterval(s);
             document.getElementById("demo").innerHTML = "문제가 업로드 되었습니다";
+
+            let problems;
+
+            $.ajax({
+                type: 'GET',
+                url: '/api/getProblems',
+                success: function (response) {
+                    problems = response;
+                    console.log(problems);
+                }
+
+            });
+
         }
     }, 1000);
 </script>
@@ -59,6 +73,7 @@
     <p>
         <a href="<c:url value="/logout" />">[로그아웃]</a>
         <a href="<c:url value="/problemlist" />">[문제 목록]</a>
+        <a href="/main/mypage.html">[마이 페이지]</a>
         <strong>문제 업로드 까지 남은 시간</strong>
         <div id = "demo"></div>
     </p>

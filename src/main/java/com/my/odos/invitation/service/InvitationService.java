@@ -2,16 +2,13 @@ package com.my.odos.invitation.service;
 
 import com.my.odos.domain.Invitation;
 import com.my.odos.domain.Member;
-import com.my.odos.domain.Team;
 import com.my.odos.exception.InvitationException;
 import com.my.odos.invitation.repository.InvitationRepository;
-import com.my.odos.invitation.repository.MemberRepository;
-import com.my.odos.invitation.repository.TeamRepository;
+import com.my.odos.member.repository.MemberRepository;
+import com.my.odos.team.service.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalTime;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +16,7 @@ public class InvitationService {
 
     private final InvitationRepository invitationRepository;
     private final MemberRepository memberRepository;
-    private final TeamRepository teamRepository;
+    private final TeamService teamService;
 
     public Boolean createInvitation(int fromId, int toId) {
         Invitation check = invitationRepository.findByToIdAndFromId(toId, fromId);
@@ -61,15 +58,7 @@ public class InvitationService {
         );
         receiver.setConnected(true);
 
-        //팀을 만들고 sender와 receiver를 지금 만들어지는 팀에 연결
-        Team team = new Team();
-        team.setUploadTime(LocalTime.of(1,0,0));
-        teamRepository.save(team);
-
-        sender.setGroupId(team.getId());
-        receiver.setGroupId(team.getId());
-
-
+        teamService.makeTeam(sender, receiver);
         return true;
     }
 }
