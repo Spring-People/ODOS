@@ -5,8 +5,11 @@
 <head>
     <title>메인</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript"><%@include file="main.js" %></script>
 </head>
 <script language="JavaScript">
+
+
 
     var now = new Date();
     var nowHour = now.getHours();
@@ -44,17 +47,7 @@
             clearInterval(s);
             document.getElementById("demo").innerHTML = "문제가 업로드 되었습니다";
 
-            let problems;
-
-            $.ajax({
-                type: 'GET',
-                url: '/api/getProblems',
-                success: function (response) {
-                    problems = response;
-                    console.log(problems);
-                }
-
-            });
+            getTodayProblem();
 
         }
     }, 1000);
@@ -76,6 +69,9 @@
         <a href="/main/mypage.html">[마이 페이지]</a>
         <strong>문제 업로드 까지 남은 시간</strong>
         <div id = "demo"></div>
+        <div id="problem-container">
+            <a id="today-problem-link" href="#">오늘의 문제로 이동</a>
+        </div>
     </p>
 
 </c:if>
