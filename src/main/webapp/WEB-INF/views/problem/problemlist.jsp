@@ -14,7 +14,7 @@
             <th>No</th>
         </tr>
         <c:forEach var="problem" items="${problemList}">
-            <tr>
+            <tr onClick="location.href='problem/detail/${problem.id}'">
                 <td>${problem.num}</td>
             </tr>
         </c:forEach>

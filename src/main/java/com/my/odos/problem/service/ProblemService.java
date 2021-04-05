@@ -3,6 +3,7 @@ package com.my.odos.problem.service;
 import com.my.odos.domain.Member;
 import com.my.odos.domain.Problem;
 import com.my.odos.domain.Team;
+import com.my.odos.exception.ProblemException;
 import com.my.odos.invitation.repository.TeamRepository;
 import com.my.odos.login.vo.AuthInfo;
 import com.my.odos.problem.repository.UserRepository;
@@ -51,5 +52,21 @@ public class ProblemService {
             problemRepository.save(problem);
         }
 
+    }
+
+    public Problem findProblem(HttpSession session, int id){
+
+        Problem problem = problemRepository.findById(id);
+
+        if(problem == null)
+            throw new ProblemException("해당 problem이 없습니다");
+
+        AuthInfo currentUser = (AuthInfo) session.getAttribute("authInfo");
+        Member member = userRepository.findById(currentUser.getId());
+
+        if(problem.getGroupId() != member.getGroupId())
+            throw new ProblemException("해당 problem에 권한이 없습니다");
+
+        return problem;
     }
 }
