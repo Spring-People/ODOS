@@ -1,4 +1,4 @@
-package com.my.odos.invitation.vo;
+package com.my.odos.login.vo;
 
 public class LoginMemberInfo {
     private String id;
