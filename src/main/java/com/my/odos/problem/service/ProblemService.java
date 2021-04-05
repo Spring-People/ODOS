@@ -1,17 +1,14 @@
 package com.my.odos.problem.service;
 
-import com.my.odos.domain.Member;
 import com.my.odos.domain.Problem;
 import com.my.odos.domain.Team;
-import com.my.odos.invitation.repository.TeamRepository;
-import com.my.odos.login.vo.AuthInfo;
+import com.my.odos.team.respository.TeamRepository;
 import com.my.odos.problem.repository.UserRepository;
 import com.my.odos.problem.repository.ProblemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Random;

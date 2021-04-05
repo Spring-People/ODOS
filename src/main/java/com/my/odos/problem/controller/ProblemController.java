@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -29,5 +30,17 @@ public class ProblemController {
         model.addAttribute("problemList",problemList);
 
         return "problem/problemlist";
+    }
+
+    @GetMapping("/api/getProblems")
+    @ResponseBody
+    public List<Problem> getProblems(HttpSession session) {
+        int currentId = ((AuthInfo) session.getAttribute("authInfo")).getId();
+        Member user = userRepository.findById(currentId);
+        int groupId = user.getGroupId();
+
+        List<Problem> problemList = problemRepository.findAllByGroupIdOrderByIdDesc(groupId);
+
+        return problemList;
     }
 }
