@@ -3,11 +3,10 @@ package com.my.odos.invitation.controller;
 import com.my.odos.domain.Invitation;
 import com.my.odos.domain.Member;
 import com.my.odos.exception.InvitationException;
-import com.my.odos.invitation.repository.MemberRepository;
+import com.my.odos.member.repository.MemberRepository;
 import com.my.odos.invitation.service.InvitationService;
 import com.my.odos.invitation.vo.InvitaionEmailRequest;
 import com.my.odos.invitation.vo.InvitationTeamRequest;
-import com.my.odos.invitation.vo.LoginMemberInfo;
 import com.my.odos.login.vo.AuthInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,22 +21,6 @@ public class InvitationController {
 
     private final InvitationService invitationService;
     private final MemberRepository memberRepository;
-
-    @GetMapping("/api/receiveLoginInfo")
-    @ResponseBody
-    public LoginMemberInfo getLoginInfo(HttpSession session) {
-        /*
-        * session에서 현재 로그인한 member의 id를 리턴
-        * */
-        AuthInfo currentUser = (AuthInfo) session.getAttribute("authInfo");
-        String id = String.valueOf(currentUser.getId());
-        System.out.println(id);
-
-        LoginMemberInfo info = new LoginMemberInfo();
-        info.setId(id);
-
-        return info;
-    }
 
     @GetMapping("/api/getInvitation")
     @ResponseBody
