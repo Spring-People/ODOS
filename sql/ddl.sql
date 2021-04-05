@@ -33,3 +33,13 @@ create table Problem(
     primary key (id),
     FOREIGN KEY(group_id) REFERENCES Team(id)
 );
+
+create table Comment(
+    id int auto_increment,
+    problem_id int,
+    text char(100),
+    name char(100),
+    comment_time date,
+    primary key(id),
+    FOREIGN KEY(problem_id) REFERENCES Problem(id)
+);
