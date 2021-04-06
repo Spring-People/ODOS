@@ -27,12 +27,11 @@ public class AuthService {
         return new AuthInfo(member.getId(),member.getEmail(),member.getName());
     }
 
-    // 연결된 짝이 있는지 반환한다.
+    //연결된 짝이 있는지 반환한다.
     public boolean isConnetcedMember(String email) {
         Member member = authRepository.findByEmail(email);
 
-        if (member.isConnected()) return true;
-        else return false;
+        return member.isConnected();
     }
 
 }

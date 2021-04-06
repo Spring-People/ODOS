@@ -25,10 +25,9 @@ public class InvitationController {
     @GetMapping("/api/getInvitation")
     @ResponseBody
     public Member getInvitation(HttpSession session) {
-        /*
-        * 받은 초대장이 있는지 확인하고 있으면 보낸 member의 정보를 리턴
-        *
-        * */
+
+        //1.받은 초대장이 있는지 확인하고 있으면 보낸 member의 정보를 리턴
+
         int currentId = ((AuthInfo) session.getAttribute("authInfo")).getId();
         int fromId = -1;
         Invitation invitation = null;

@@ -13,12 +13,14 @@ public class RegisterService {
 
     private final RegisterRepository registerRepository;
 
+    //회원 등록
     public String regist(RegisterRequest req) throws DuplicateMemberException {
 
         Member check = registerRepository.findByEmail(req.getEmail());
 
+        //이미 있는 아이디 일때
         if(check != null){
-            throw new DuplicateMemberException("dup email" + req.getEmail());
+            throw new DuplicateMemberException("이미 등록된 email" + req.getEmail());
         }
 
         Member member = new Member();
@@ -26,7 +28,7 @@ public class RegisterService {
         member.setName(req.getName());
         member.setConnected(false);
         member.setPw(req.getPassword());
-        member.setGroupId(1);
+        member.setGroupId(1); //처음 디폴트 그룹 ID를 1로 설정
 
         registerRepository.save(member);
 

@@ -43,11 +43,8 @@ public class ProblemController {
     public String problemdetail(@PathVariable int id, Model model, HttpSession session) throws Exception {
 
         Problem problem = problemService.findProblem(session, id);
-
         model.addAttribute("problem", problem);
-
         List<Comment> commentList = commentService.findCommentList(id);
-
         model.addAttribute("commentList", commentList);
 
         return "problem/problemdetail";

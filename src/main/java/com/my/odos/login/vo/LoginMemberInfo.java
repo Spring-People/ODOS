@@ -2,6 +2,7 @@ package com.my.odos.login.vo;
 
 public class LoginMemberInfo {
     private String id;
+
     public String getId() {
         return id;
     }
