@@ -3,14 +3,15 @@ package com.my.odos.problem.controller;
 import com.my.odos.domain.Comment;
 import com.my.odos.domain.Member;
 import com.my.odos.login.vo.AuthInfo;
+import com.my.odos.problem.repository.CommentRepository;
 import com.my.odos.problem.repository.UserRepository;
 import com.my.odos.problem.service.CommentService;
+import com.my.odos.problem.vo.CommentRequest;
+import com.my.odos.problem.vo.ProblemIdRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -26,12 +27,13 @@ public class CommentController {
 
     @RequestMapping("/list")
     @ResponseBody
-    private List<Comment> getCommentList(@RequestParam int problem_id, Model model) {
-        return commentService.findCommentList(problem_id);
+    private List<Comment> getCommentList(@RequestBody ProblemIdRequest request) {
+        return commentService.findCommentList(request.getProblem_id());
     }
 
-    @RequestMapping("/insert")
-    private String insertComment(@RequestParam int problem_id, @RequestParam String text, HttpSession session){
+    @PostMapping("/insert")
+    @ResponseBody //json 형태로 반환
+    private Comment insertComment(@RequestBody CommentRequest request, HttpSession session){
 
         int currentId = ((AuthInfo) session.getAttribute("authInfo")).getId();
         Member user = userRepository.findById(currentId);
@@ -39,10 +41,10 @@ public class CommentController {
         Comment comment = new Comment();
         comment.setCommentTime(new Date());
         comment.setName(user.getName());
-        comment.setProblemId(problem_id);
-        comment.setText(text);
+        comment.setProblemId(request.getProblem_id());
+        comment.setText(request.getText());
         commentService.createComment(comment);
 
-        return "redirect:/problem/detail/" + comment.getProblemId();
+        return comment;
     }
 }

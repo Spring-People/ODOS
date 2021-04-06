@@ -4,29 +4,103 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Detail</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript"><%@include file="comment.js" %></script>
 </head>
 
 <script language="JavaScript">
+
     function goLink() {
         location.href = "https://www.acmicpc.net/problem/" + ${problem.num};
-
     }
 
-    window.onpageshow = function(event) {
+    <!--댓글 관련-->
+    function insertButton() {
 
-        //back forward cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
-        if (event.persisted || (window.performance && window.performance.navigation.type == 2)) {
-            //alert("check");
-            window.location.href = '/problemlist';
+    let text = $('#content').val();
+    let problem_id = $('#problemId').val();
+
+    console.log(text);
+    console.log(problem_id);
+
+    let data = {'problem_id':problem_id, 'text':text};
+
+    $.ajax({
+        type: 'POST',
+        async: false,
+        url: '/comment/insert',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(response) {
+            console.log(response);
         }
-    }
+
+    });
+
+    commentList();
+}
+
+function tempHTML(comment) {
+    return "<div><p>작성자 : " + comment.name + comment.commentTime + " </p><p>내용 : " + comment.text + "</p></div>";
+}
+
+function commentList(){
+
+    let problem_id = $('#problemId').val();
+    let data = {'problem_id':problem_id};
+    let commentContainer = $('#comment-container');
+
+    $.ajax({
+        type: 'POST',
+        url: '/comment/list',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(response) {
+            let commentList = response;
+            console.log(commentList.length);
+            let comment = commentList[commentList.length-1];
+            commentContainer.append(tempHTML(comment));
+        }
+    });
+}
+
+function commentAllList(){
+
+     let problem_id = $('#problemId').val();
+     let data = {'problem_id':problem_id};
+     let commentContainer = $('#comment-container');
+
+     $.ajax({
+         type: 'POST',
+         url: '/comment/list',
+         contentType: 'application/json',
+         data: JSON.stringify(data),
+         success: function(response) {
+             console.log(response);
+
+             let commentList = response;
+
+             for(let i=0; i<commentList.length; i++)
+             {
+                 let comment = commentList[i];
+                 commentContainer.append(tempHTML(comment));
+             }
+
+         }
+     });
+}
+
+$(document).ready(function(){
+    commentAllList(); //페이지 로딩시 댓글 목록 출력
+});
+
 </script>
 <body>
 
 
-<h2> 게시글 상세 </h2>
+<h2> 문제 상세 </h2>
 
 <div class="container">
     <div class="form-group">
@@ -38,32 +112,26 @@
         <a href="javascript:goLink()">${problem.num}번 문제 풀기</a>
     </div>
 
-    <!-- 댓글작성 -->
     <div class="container">
-        <form method="post" action="/comment/insert">
-            <div class="input-group">
-                <p>
-                    <input type="hidden" name="problem_id" value="${problem.id}"/>
-                </p>
-                <p>
-                    <textarea rows="5" cols="50" name="text" placeholder="내용을 입력하세요."></textarea>
-                </p>
-                <p>
-                    <button class="btn btn-default" type="submit">등록</button>
-               </p>
-            </div>
-        </form>
+        <div class="input-group">
+             <input type="hidden" name="problemId" id="problemId" value="${problem.id}"/>
+             <input type="text" class="form-control" id="content" name="content">
+             <span class="input-group-btn">
+                 <button id="insertButton" onclick="insertButton()" class="btn btn-default" name="insertButton" type="button">등록</button>
+             </span>
+         </div>
     </div>
 
-    <!-- 댓글목록 -->
-    <c:forEach var="comment" items="${commentList}">
+    <div id="comment-container" class="container">
         <div>
-            <p>${comment.name} / <fmt:formatDate value="${comment.commentTime}" pattern="yyyy-MM-dd" /> </p>
-            <p>${comment.text}</p>
+            <h3>댓글</h3>
         </div>
-    </c:forEach>
+        <div class="commentList"></div>
+    </div>
+
 
 </div>
+
 
 <%@ include file="bootstrap.jsp" %>
 </body>
