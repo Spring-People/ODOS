@@ -19,7 +19,7 @@
     <link href="${pageContext.request.contextPath}/css/loginForm.css" rel="stylesheet" type="text/css">
     <title>로그인</title>
 </head>
-<body cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
+<body class="loginbody" cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
 <div class="card align-middle" style="width:55rem; border-radius:20px;">
     <div class="card-title" style="margin-top:30px;">
         <h2 class="card-title text-center" style="color:#113366;">로그인</h2>
@@ -36,7 +36,7 @@
                 <form:checkbox path="rememberEmail"/>비밀번호 저장
             </label>
             </div>
-    <input type="submit" value="로그인" class="btn btn-lg btn-primary btn-block" >
+    <input type="submit" value="로그인" class="btn btn-lg btn-block btn-info" >
     </form:form>
     <br>
     <p><a href="<c:url value='/register/step1'/>">회원가입</a></p>
