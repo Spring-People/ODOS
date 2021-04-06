@@ -7,6 +7,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript"><%@include file="main.js" %></script>
 
+    <!-- 추가 -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- made CSS -->
+    <link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet" type="text/css">
+
 </head>
 <script language="JavaScript">
 
@@ -40,7 +54,7 @@
         Min = Math.floor(Min);
         Sec = (Check%3600)%60;
 
-        document.getElementById("demo").innerHTML = Hour + "시" + Min + "분" + Sec + "초";
+        document.getElementById("demo").innerHTML = Hour + "시간 " + Min + "분 " + Sec + "초";
 
         Check--;
 
@@ -53,7 +67,7 @@
         }
     }, 1000);
 </script>
-<body>
+<body class="mainbody" cellpadding="0" cellspacing="0" marginleft="0" margintop="0" width="100%" height="100%" align="center">
 <c:if test="${empty authInfo}">
     <p>환영합니다.</p>
     <p>
@@ -63,17 +77,34 @@
 </c:if>
 
 <c:if test="${! empty authInfo}">
-    <p>${authInfo.name}님, 환영합니다.</p>
-    <p>
-        <a href="<c:url value="/logout" />">[로그아웃]</a>
-        <a href="<c:url value="/problemlist" />">[문제 목록]</a>
-        <a href="/main/mypage.html">[마이 페이지]</a>
-        <strong>문제 업로드 까지 남은 시간</strong>
-        <div id = "demo"></div>
-        <div id="problem-container">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+        <!-- Links -->
+        <ul class="navbar-nav nav-right">
+            <li role="menuitem" class="nav-item">
+                <a class="nav-link" href="<c:url value="/problemlist" />">문제목록</a>
+            </li>
+            <li role="menuitem" class="nav-item">
+                <a class="nav-link" href="/main/mypage.html">마이페이지</a>
+            </li>
+            <li role="menuitem" class="nav-item">
+                <a class="nav-link" href="<c:url value="/logout" />">로그아웃</a>
+            </li>
+            <li role="menuitem" class="nav-item">
+                <a class="nav-link" href="/main/mypage.html">${authInfo.name}님, 환영합니다.</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="jumbotron text-center wait align-middle">
+        <h3>문제 업로드 까지 남은 시간</h3>
+        <div class="waiting" id = "demo"></div>
+        <div class="waiting" id="problem-container">
             <a id="today-problem-link" href="#">오늘의 문제로 이동</a>
         </div>
-    </p>
+    </div>
+
+
 
 </c:if>
 
