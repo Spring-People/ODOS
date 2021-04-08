@@ -42,19 +42,21 @@ public class ProblemService {
 
             t.setSolveLimit(0);
 
-            //1000~21000 까지 랜덤 번호 생성
-            Random rd = new Random();
-            int number = rd.nextInt(20000) + 1000;
-            int group_id = t.getId();
-
-            Problem problem = new Problem();
-            problem.setGroupId(group_id);
-            problem.setNum(number);
-            problem.setSolved(0);
-
-            problemRepository.save(problem);
+            makeProblem(t.getId());
         }
+    }
+    
+    public void makeProblem(int groupId) {
+        //1000~21000 까지 랜덤 번호 생성
+        Random rd = new Random();
+        int number = rd.nextInt(20000) + 1000;
 
+        Problem problem = new Problem();
+        problem.setGroupId(groupId);
+        problem.setNum(number);
+        problem.setSolved(0);
+
+        problemRepository.save(problem);
     }
 
     public Problem findProblem(HttpSession session, int id){
