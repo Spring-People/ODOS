@@ -2,6 +2,7 @@ package com.my.odos.team.service;
 
 import com.my.odos.domain.Member;
 import com.my.odos.domain.Team;
+import com.my.odos.problem.service.ProblemService;
 import com.my.odos.team.respository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.jni.Local;
@@ -15,6 +16,7 @@ import java.time.LocalTime;
 public class TeamService {
 
     private final TeamRepository teamRepository;
+    private final ProblemService problemService;
 
     @Transactional
     public Integer updateUploadTime(int id, int time, int am_pm) {
@@ -33,10 +35,12 @@ public class TeamService {
         team.setUploadTime(LocalTime.of(12,0,0));
 
         team.setSolveLimit(0);
-        teamRepository.save(team);
+        Team myTeam = teamRepository.save(team);
 
         sender.setGroupId(team.getId());
         receiver.setGroupId(team.getId());
+
+        problemService.makeProblem(myTeam.getId());
 
         return team;
     }
