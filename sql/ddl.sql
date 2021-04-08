@@ -4,6 +4,7 @@ create table Team
     upload_time time,
     primary key(id)
 );
+alter table Team add solve_limit int;
 
 create table Member
 (

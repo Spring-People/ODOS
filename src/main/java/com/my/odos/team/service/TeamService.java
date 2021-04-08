@@ -30,7 +30,8 @@ public class TeamService {
     public Team makeTeam(Member sender, Member receiver) {
         Team team = new Team();
 
-        team.setUploadTime(LocalTime.of(1,0,0));
+        team.setUploadTime(LocalTime.of(12,0,0));
+
         team.setSolveLimit(0);
         teamRepository.save(team);
 

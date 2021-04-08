@@ -8,13 +8,12 @@ import com.my.odos.problem.repository.ProblemRepository;
 import com.my.odos.problem.repository.UserRepository;
 import com.my.odos.problem.service.CommentService;
 import com.my.odos.problem.service.ProblemService;
+import com.my.odos.problem.vo.SolvedRequest;
+import com.my.odos.team.vo.TeamUploadTimeRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -60,5 +59,12 @@ public class ProblemController {
         List<Problem> problemList = problemRepository.findAllByGroupId(groupId);
 
         return problemList;
+    }
+
+    @PutMapping("/api/problem/solved/{id}")
+    @ResponseBody
+    public int updateSolved(@PathVariable int id, @RequestBody SolvedRequest request){
+
+        return problemService.updateSolved(id,request.getCheck_number());
     }
 }
