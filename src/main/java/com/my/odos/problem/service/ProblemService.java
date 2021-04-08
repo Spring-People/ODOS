@@ -11,6 +11,7 @@ import com.my.odos.problem.repository.ProblemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalTime;
@@ -68,5 +69,23 @@ public class ProblemService {
             throw new ProblemException("해당 problem에 권한이 없습니다");
 
         return problem;
+    }
+
+    @Transactional
+    public int updateSolved(int id, int check_number){
+
+        Problem problem = problemRepository.findById(id);
+        Team team = teamRepository.findById(problem.getGroupId());
+
+        problem.setSolved(check_number);
+
+        //둘다 문제를 풀었을때
+        if(check_number == -1)
+        {
+            int this_solved_limit = team.getSolveLimit();
+            team.setSolveLimit(this_solved_limit+1);
+        }
+
+        return check_number;
     }
 }
