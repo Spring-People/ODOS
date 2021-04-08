@@ -39,6 +39,8 @@ public class ProblemService {
             if(t.getUploadTime() != checkTime)
                 continue;
 
+            t.setSolveLimit(0);
+
             //1000~21000 까지 랜덤 번호 생성
             Random rd = new Random();
             int number = rd.nextInt(20000) + 1000;
