@@ -22,7 +22,9 @@ public class TeamService {
     public Integer updateUploadTime(int id, int time, int am_pm) {
         Team team = teamRepository.findById(id);
         if (am_pm == 1) time += 12;
-        if (time == 24) time = 0;
+        if (time == 12) time = 0;
+        if (time == 24) time = 12;
+
 
         team.setUploadTime(LocalTime.of(time, 0, 0));
 
