@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: 'GET',
-        url: '/api/receiveLoginInfo',
+        url: '/login/api/receiveLoginInfo',
         success: function (response) {
             currentId = response.id;
             console.log(currentId);
