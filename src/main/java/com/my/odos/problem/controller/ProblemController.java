@@ -57,7 +57,7 @@ public class ProblemController {
         Member user = userRepository.findById(currentId);
         int groupId = user.getGroupId();
 
-        List<Problem> problemList = problemRepository.findAllByGroupIdOrderByIdDesc(groupId);
+        List<Problem> problemList = problemRepository.findAllByGroupId(groupId);
 
         return problemList;
     }
