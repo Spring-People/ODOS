@@ -1,0 +1,43 @@
+@import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+@CHARSET "utf-8";
+
+.problemlistbody {
+    width:100%;
+    height:100%;
+    font-family: "Nanum Gothic", arial, helvetica, sans-serif;
+    background-repeat: no-repeat;
+    background:linear-gradient(to bottom right, #66F8F0, #20B2AA);
+}
+
+.problemlink {
+    text-align: center;
+    font-size:65px;
+}
+
+.problemmessage {
+    text-align: center;
+    font-size: 35px;
+    color: #FF3232;
+}
+
+.comment{
+    background-repeat: no-repeat;
+    background:linear-gradient(to bottom right, #E1F6FA, #E1F6FA);
+}
+
+.wait {
+    width:85%;
+    background-repeat: no-repeat;
+    background:linear-gradient(to bottom right, #148CFF, #5AD2FF);
+    position:absolute;
+    top:50%;
+    margin-left:100px;
+    margin-top:-150px;
+    border-radius: 10px;
+}
+
+.waiting {
+    color : #FF3232;
+    font-weight: bold;
+    font-size:65px;
+}
