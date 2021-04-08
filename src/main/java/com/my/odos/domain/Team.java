@@ -14,6 +14,8 @@ public class Team {
 
     private LocalTime uploadTime;
 
+    private int solveLimit;
+
     public Team() {
     }
 
@@ -31,5 +33,13 @@ public class Team {
 
     public void setUploadTime(LocalTime uploadTime) {
         this.uploadTime = uploadTime;
+    }
+
+    public int getSolveLimit() {
+        return solveLimit;
+    }
+
+    public void setSolveLimit(int solveLimit) {
+        this.solveLimit = solveLimit;
     }
 }
