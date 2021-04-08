@@ -4,7 +4,9 @@ import com.my.odos.domain.Invitation;
 import com.my.odos.domain.Member;
 import com.my.odos.exception.InvitationException;
 import com.my.odos.invitation.repository.InvitationRepository;
+
 import com.my.odos.member.repository.MemberRepository;
+
 import com.my.odos.team.service.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ public class InvitationService {
 
     private final InvitationRepository invitationRepository;
     private final MemberRepository memberRepository;
+
     private final TeamService teamService;
 
     public Boolean createInvitation(int fromId, int toId) {
@@ -59,6 +62,7 @@ public class InvitationService {
         receiver.setConnected(true);
 
         teamService.makeTeam(sender, receiver);
+
         return true;
     }
 }
