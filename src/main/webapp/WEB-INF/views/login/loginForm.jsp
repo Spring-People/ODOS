@@ -33,7 +33,7 @@
             <form:password path="password" class="form-control" placeholder="Password" /> <br>
             <div class="checkbox">
             <label>
-                <form:checkbox path="rememberEmail"/>비밀번호 저장
+                <form:checkbox path="rememberEmail"/>이메일 저장
             </label>
             </div>
     <input type="submit" value="로그인" class="btn btn-lg btn-block btn-info" >
