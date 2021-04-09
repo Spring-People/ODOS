@@ -1,22 +1,59 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>초대장 페이지</title>
+    <link rel="stylesheet" href="./receiveInvitation.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="receive.js"></script>
+
 </head>
+
 <body>
 
-초대장 수락
 
-<div id="invitation-list-container">
-    <ul id="invitation-list">
-        <li>이름 </li>
-        <button onclick="makeConnection()">초대장 수락</button>
-    </ul>
 
-</div>
+    <div class="container">
+        <!-- <h1>초대장 목록</h1>
+    <div id="invitation-list-container">
+        <ul id="invitation-list">
+            <div class="invitation">
+                <li>이름</li>
+                <button class="receive-button" onclick="makeConnection()">초대장 수락</button>
+            </div>
+            <div class="invitation">
+                <li>이름</li>
+                <button class="receive-button" onclick="makeConnection()">초대장 수락</button>
+            </div>
+
+        </ul>
+    </div> -->
+        <div id="invitation-none" class="invitation">
+            <span>
+                <h1>🥺 아직 받은 초대장이 없어요.</h1>
+                친구에게 초대장을 보내보세요!
+                <div class="invitation-button">
+                    <a href="SendInvitation.html">초대장 보내기</a>
+                </div>
+            </span>
+        </div>
+
+        <div id="invitation-exist" class="invitation hide">
+            <span>
+                <h1>🎉<span id="sender-name">이름</span> 님이 초대장을 보냈어요!</h1>
+                초대장을 받아 서비스를 시작해보세요!
+            </span>
+
+            <div class="invitation-button">
+                <button id="receive-button">초대장 수락</button>
+            </div>
+        <div>
+
+
+    </div>
+
 
 </body>
+
 </html>
