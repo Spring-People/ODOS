@@ -1,42 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>마이페이지</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./mypage.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="mypage.js"></script>
 </head>
+
 <body>
-    <h1>마이 페이지</h1>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Links -->
+        <ul class="navbar-nav nav-right">
+            <li role="menuitem" class="nav-item">
+                <a class="nav-link" href="/problemlist" />문제목록</a>
+            </li>
+            <li role="menuitem" class="nav-item">
+                <a class="nav-link" href="/main/mypage.html">마이페이지</a>
+            </li>
+            <li role="menuitem" class="nav-item">
+                <a class="nav-link" href="/logout" />로그아웃</a>
+            </li>
+            <li role="menuitem" class="nav-item">
+                <a class="nav-link" href="/main/mypage.html">${authInfo.name}님, 환영합니다.</a>
+            </li>
+        </ul>
+    </nav>
 
 
-    <div>
-        <label for="upload-time-select">문제 받는 시간 설정</label>
-        <select id="upload-time-select" name="upload-time">
-            <option value="1">1시</option>
-            <option value="2">2시</option>
-            <option value="3">3시</option>
-            <option value="4">4시</option>
-            <option value="5">5시</option>
-            <option value="6">6시</option>
-            <option value="7">7시</option>
-            <option value="8">8시</option>
-            <option value="9">9시</option>
-            <option value="10">10시</option>
-            <option value="11">11시</option>
-            <option value="12">12시</option>
-        </select>
+    <div class="container">
+        <h3>닉네임</h3>
 
-        <div>
-            <input type="radio" id="am" name="am-pm" value="0">
-            <label for="am">오전</label>
-            <input type="radio" id="pm" name="am-pm" value="1" checked>
-            <label for="pm">오후</label>
+        <div class="input-group">
+            문제 받는 시간
+            <div class="time-select-container">
+                시간 선택 &nbsp;
+                <select id="upload-time-select" name="upload-time">
+                    <option value="1">1시</option>
+                    <option value="2">2시</option>
+                    <option value="3">3시</option>
+                    <option value="4">4시</option>
+                    <option value="5">5시</option>
+                    <option value="6">6시</option>
+                    <option value="7">7시</option>
+                    <option value="8">8시</option>
+                    <option value="9">9시</option>
+                    <option value="10">10시</option>
+                    <option value="11">11시</option>
+                    <option value="12">12시</option>
+                </select>
+
+                <div class="radio-button">
+                    <input type="radio" id="am" name="am-pm" value="0">
+                    <label for="am">오전</label>
+                    <input type="radio" id="pm" name="am-pm" value="1" checked>
+                    <label for="pm">오후</label>
+                </div>
+
+
+            </div>
         </div>
 
-        <button onclick="updateReceiveProblemTime()">저장</button>
+        <button class="save-button" onclick="updateReceiveProblemTime()">저장</button>
 
     </div>
-
 </body>
+
 </html>

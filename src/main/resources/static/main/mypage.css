@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.time-select-container {
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    border: 1px solid #ced4da;
+    padding: 10px;
+}
+
+.input-group {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.radio-button {
+    display: inline;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.save-button {
+    size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: #d4edda;
+    color: #155724;
+    border: none;
+}
