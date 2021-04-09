@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>초대장 페이지</title>
+    <link rel="stylesheet" href="sendInvitation.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="send.js"></script>
 </head>
 <body>
 
-초대장 보내기
-<div>
 
-        <label for="receiver-email"></label>
-        <input id="receiver-email" type="text" placeholder="email 입력">
-        <button onclick="sendInvitation()">보내기</button>
+<div class="container">
+    <h1>✉️ 초대장 보내기</h1>
+    친구에게 초대장을 보내보세요!
 
+    <div class="input-group">
+        <input id="receiver-email" type="text" placeholder="email을 입력하세요.">
+        <div class="button-group">
+            <button onclick="sendInvitation()">보내기</button>
+            <button onclick="">취소</button>
+        </div>
+        
+    </div>
 
 </div>
 
