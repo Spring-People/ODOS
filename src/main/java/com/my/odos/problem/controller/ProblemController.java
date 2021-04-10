@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -51,7 +52,12 @@ public class ProblemController {
 
     @GetMapping("/api/getProblems")
     @ResponseBody
-    public List<Problem> getProblems(HttpSession session) {
+    public List<Problem> getProblems(HttpSession session, HttpServletResponse response) {
+        response.setHeader("Expires", "Sat, 6 May 1995 12:00:00 GMT");
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+        response.setHeader("Pragma", "no-cache");
+
         int currentId = ((AuthInfo) session.getAttribute("authInfo")).getId();
         Member user = userRepository.findById(currentId);
         int groupId = user.getGroupId();
