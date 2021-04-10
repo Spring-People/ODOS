@@ -10,7 +10,6 @@ let destTotal;
 $(document).ready(function() {
     todayProblemContainer = $('#problem-container');
     todayProblemContainer.hide();
-    // $('demo').hide();
     setTodayProblem();
 });
 
@@ -18,13 +17,7 @@ function setCheck(val) {
     check = val;
 }
 
-function setClockShow(val) {
-    if (val === true) clockShow = true;
-    else clockShow = false;
-}
-
-function getClockShow() { return clockShow; }
-
+// setTodayProblem: 오늘의 문제 설정
 function setTodayProblem() {
     let problems;
     let problemListLength;
@@ -33,37 +26,28 @@ function setTodayProblem() {
         type: 'GET',
         url: '/api/getProblems',
         success: function (response) {
-            console.log("time" + uploadTime);
             problems = response;
-            console.log(problems);
             groupId = problems[0].groupId;
-            console.log('그룹 아이디' + groupId);
 
             todayProblemIdx = getTodayProblemIdx(problems);
             problemListLength = problems.length;
 
             if (todayProblemIdx > problemListLength) {
                 // 1. 문제 다 풀었을 때
-                console.log('case 1');
                 todayProblemContainer.hide();
                 showTime();
             } else if (todayProblemIdx === problemListLength) {
                 // 2. 문제 안 밀렸을 때
-                console.log('case 2');
-
                 setProblem(problems,todayProblemIdx - 1);
                 checkLimit();
 
                 if (nowTotal < destTotal) {
-                    console.log('시간 보기');
                     showTime();
                 } else {
                     $('demo').hide();
                     todayProblemContainer.show();
                 }
             } else {
-                console.log('case 3');
-
                 // 3. 문제 밀렸을 때
                 setProblem(problems, todayProblemIdx - 1);
                 todayProblemContainer.show();
@@ -74,16 +58,15 @@ function setTodayProblem() {
     });
 }
 
+// checkLimit: 하루에 풀 수 있는 최대 한계치를 넘겼는지 확
 function checkLimit() {
     $.ajax({
         type: 'GET',
         url: '/api/getTeamInfo/'+groupId,
         success: function (response) {
-            console.log(response);
             let solveLimit = response.solveLimit;
 
             if (solveLimit == 2) {
-                console.log("오늘 2문제 다 풀었음");
                 showTime();
                 todayProblemContainer.hide();
             } else {
@@ -94,24 +77,25 @@ function checkLimit() {
     });
 }
 
+// setProblem : 문제 링크 설정
 function setProblem(problems, idx) {
     let todayProblem = problems[idx];
-    console.log('오늘의 문제' + todayProblem);
     let problemId = todayProblem.id;
-    console.log(problemId);
     $('#today-problem-link').attr('href', '/problem/detail/'+problemId);
 
 }
 
+// getTodayProblemIdx: 아직 풀지 못한 문제를 찾음
 function getTodayProblemIdx(problems) {
     let i = 0;
     for (; i<problems.length; i++) {
-        if (problems[i].solved != -1)
+        if (problems[i].solved !== -1)
             return i + 1;
     }
     return i + 1;
 }
 
+// setUploadTime: 다음 문제 업로드 시간 계산
 function setUploadTime(time) {
     uploadTime = time;
     //getTime();
@@ -128,10 +112,8 @@ function setUploadTime(time) {
     destTotal = (destHour * 3600) + (destMin*60);
 }
 
+// showTime: html 페이지에 시간 로드
 function showTime() {
-    console.log('getTime');
-
-
     var Hour;
     var Min;
     var Sec;

@@ -17,6 +17,9 @@ public class TeamController {
     private final TeamService teamService;
     private final TeamRepository teamRepository;
 
+    /*
+     * getTeamInfo: id에 해당하는 Team 객체를 리턴
+     * */
     @GetMapping("/api/getTeamInfo/{id}")
     @ResponseBody
     public Team getTeamInfo(@PathVariable Integer id) {
@@ -25,9 +28,12 @@ public class TeamController {
         );
     }
 
+    /*
+     * updateTeamUploadTime: id에 해당하는 team에 시간을 변경한다.
+     * */
     @PutMapping("/api/updateTeamUploadTime/{id}")
     @ResponseBody
-    public Integer updateUploadTime(@PathVariable Integer id, @RequestBody TeamUploadTimeRequest request) {
+    public Integer updateTeamUploadTime(@PathVariable Integer id, @RequestBody TeamUploadTimeRequest request) {
         int time = request.getTime();
         int am_pm = request.getAm_pm();
 

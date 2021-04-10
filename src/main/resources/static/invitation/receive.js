@@ -15,7 +15,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: 'GET',
-        url: '/api/getInvitation',
+        url: '/api/getSender',
         success: function (response) {
             console.log(response);
             let itemDto = response;

@@ -1,25 +1,7 @@
-let currentId;
-
-// html 로드 시 바로 실행
-/*
-$(document).ready(function () {
-    $.ajax({
-        type: 'GET',
-        url: '/api/getInfo',
-        success: function (response) {
-            console.log(response);
-            currentId = response.id;
-        }
-    });
-});
-*/
-
+// sendInvitation: 이메일 전달 요청
 function sendInvitation() {
-    let email = $('#receiver-email').val();
-    console.log("receiver", email);
-    // console.log("sender Id", currentId);
-
-    let data = {'to_email': email};
+    let receiverEmail = $('#receiver-email').val();
+    let data = {'to_email': receiverEmail};
 
     $.ajax({
         type: 'POST',
@@ -27,8 +9,7 @@ function sendInvitation() {
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: function (response) {
-            console.log(response);
-            console.log("모달 띄우");
+            alert('성공적으로 초대장을 보냈습니다.');
         }
     });
 

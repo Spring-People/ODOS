@@ -2,27 +2,22 @@ let currentId;
 let teamId;
 
 $(document).ready(function () {
+    // 현재 로그인 정보 요청
     $.ajax({
         type: 'GET',
         url: '/api/getMemberInfo',
         success: function (response) {
-            console.log(response);
             currentId = response.id;
             teamId = response.groupId;
-            console.log(currentId);
         }
     });
 });
 
+// updateReceiveProblemTime: 시간 변경 요청
 function updateReceiveProblemTime() {
-    let time = $('#upload-time-select').val();
+    let new_upload_time = $('#upload-time-select').val();
     let am_pm = $('input[name=am-pm]:checked').val();
-
-    console.log(time);
-
-    console.log(am_pm);
-
-    let data = {'time': time, 'am_pm': am_pm};
+    let data = {'time': new_upload_time, 'am_pm': am_pm};
 
     $.ajax({
         type: "PUT",
