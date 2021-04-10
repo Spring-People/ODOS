@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Controller
@@ -30,10 +31,10 @@ public class InvitationController {
 
         int currentId = ((AuthInfo) session.getAttribute("authInfo")).getId();
         int fromId = -1;
-        Invitation invitation = null;
+        List<Invitation> invitationList = null;
         try {
-            invitation = invitationService.findInvitation(currentId);
-            fromId = invitation.getFromId();
+            invitationList = invitationService.findInvitation(currentId);
+            fromId = invitationList.get(0).getFromId();
 
         } catch (InvitationException e) {
             e.printStackTrace();

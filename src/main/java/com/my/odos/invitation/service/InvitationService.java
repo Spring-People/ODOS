@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class InvitationService {
@@ -39,11 +41,11 @@ public class InvitationService {
         return true;
     }
 
-    public Invitation findInvitation(int currentId) {
+    public List<Invitation> findInvitation(int currentId) {
         System.out.println("현재 접속한 id "+currentId);
-        Invitation invitation = invitationRepository.findByToId(currentId);
-        if (invitation == null) throw new InvitationException("받은 초대장이 없음");
-        return invitation;
+        List<Invitation> invitationList = invitationRepository.findByToId(currentId);
+        if (invitationList == null) throw new InvitationException("받은 초대장이 없음");
+        return invitationList;
     }
 
     @Transactional
