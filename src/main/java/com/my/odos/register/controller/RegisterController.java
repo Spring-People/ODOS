@@ -7,9 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,7 +38,9 @@ public class RegisterController {
     }
 
     @PostMapping("/register/step3")
-    public String handleStep3(RegisterRequest regReq){
+    public String handleStep3(@Valid RegisterRequest regReq, Errors errors){
+
+        if(errors.hasErrors()) { return "register/step2"; }
 
         //비밀번호 확인한게 다를때
         if(!regReq.isPasswordEqualToConfirmPassword()) { return "register/step2"; }

@@ -28,18 +28,22 @@
             <p>
                 <label>이메일</label><br>
                     <form:input path="email" class="form-control" />
+                    <form:errors path="email" />
             </p>
             <p>
                 <label>이름</label><br>
                     <form:input path="name" class="form-control" />
+                    <form:errors path="name" />
             </p>
             <p>
                 <label>비밀번호</label><br>
                     <form:password path="password" class="form-control" />
+                    <form:errors path="password" />
             </p>
             <p>
                 <label>비밀번호 확인</label><br>
                     <form:password path="confirmPassword" class="form-control" />
+                    <form:errors path="confirmPassword" />
             </p>
             <input type="submit" value="가입 완료" class="btn btn-lg btn-block btn-info">
         </form:form>
