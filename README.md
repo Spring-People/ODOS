@@ -59,4 +59,4 @@ Spring Framework를 이용한 알고리즘 스터디 웹 서비스
 
 ## Author
 - [genius-jo](https://github.com/genius-jo),
-[Yanjoo](https://github.com/Yanjoo)
+[yanJuicy](https://github.com/yanJuicy)
